@@ -14,7 +14,7 @@ namespace RomanNumbers
         [TestCase(100, "C")]
         [TestCase(500, "D")]
         [TestCase(1000, "M")]
-        public void Calculate_returns_arabic_for_roman_digit(int arabic, string roman)
+        public void ToArabicValue_returns_arabic_for_roman_digit(int arabic, string roman)
         {
             var result = roman.ToArabicValue();
 
@@ -25,7 +25,7 @@ namespace RomanNumbers
         [TestCase(30, 3, 'X')]
         [TestCase(300, 3, 'C')]
         [TestCase(3000, 3, 'M')]
-        public void Calculate_returns_sum_for_same_roman_symbol(int arabic, int no, char symbol)
+        public void ToArabicValue_returns_sum_for_same_roman_symbol(int arabic, int no, char symbol)
         {
             var roman = GetMultiple(no, symbol);
 
@@ -35,7 +35,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_returns_sum()
+        public void ToArabicValue_returns_sum_for_MCMLIV()
         {
             var result = "MCMLIV".ToArabicValue();
 
@@ -43,7 +43,7 @@ namespace RomanNumbers
         }
         
         [Test]
-        public void Calculate_returns_sum_2()
+        public void ToArabicValue_returns_sum_VIII()
         {
             var result = "VIII".ToArabicValue();
 
@@ -51,7 +51,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_returns_4_for_IV()
+        public void ToArabicValue_returns_4_for_IV()
         {
             var result = "IV".ToArabicValue();
 
@@ -59,7 +59,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_returns_9_for_IX()
+        public void ToArabicValue_returns_9_for_IX()
         {
             var result = "IX".ToArabicValue();
 
@@ -67,7 +67,7 @@ namespace RomanNumbers
         } 
         
         [Test]
-        public void Calculate_returns_40_for_XL()
+        public void ToArabicValue_returns_40_for_XL()
         {
             var result = "XL".ToArabicValue();
 
@@ -75,7 +75,7 @@ namespace RomanNumbers
         }       
         
         [Test]
-        public void Calculate_returns_90_for_XC()
+        public void ToArabicValue_returns_90_for_XC()
         {
             var result = "XC".ToArabicValue();
 
@@ -83,7 +83,7 @@ namespace RomanNumbers
         }
         
         [Test]
-        public void Calculate_returns_400_for_CD()
+        public void ToArabicValue_returns_400_for_CD()
         {
             var result = "CD".ToArabicValue();
 
@@ -91,7 +91,7 @@ namespace RomanNumbers
         }       
         
         [Test]
-        public void Calculate_returns_900_for_CM()
+        public void ToArabicValue_returns_900_for_CM()
         {
             var result = "CM".ToArabicValue();
 
@@ -99,7 +99,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_throws_when_input_is_null()
+        public void ToArabicValue_throws_when_input_is_null()
         {
             string roman = null;
 
@@ -107,7 +107,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_throws_when_input_is_empty()
+        public void ToArabicValuethrows_when_input_is_empty()
         {
             var roman = string.Empty;
 
@@ -115,7 +115,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_throws_when_input_contains_only_white_chars()
+        public void ToArabicValue_throws_when_input_contains_only_white_chars()
         {
             var roman = "     ";
 
@@ -123,7 +123,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_throws_when_input_contains_invalid_ronam_symbols()
+        public void ToArabicValue_throws_when_input_contains_invalid_roman_symbols()
         {
             var roman = "M3CM";
 
@@ -131,7 +131,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_throws_when_input_contains_I_in_front_of_L()
+        public void ToArabicValue_throws_when_input_contains_I_in_front_of_L()
         {
             var roman = "IL";
 
@@ -145,7 +145,7 @@ namespace RomanNumbers
         [TestCase('C')]
         [TestCase('D')]
         [TestCase('M')]
-        public void Calculate_throws_when_input_contains_4_consecutive_times_roman_symbol(char ch)
+        public void ToArabicValue_throws_when_input_contains_4_consecutive_times_roman_symbol(char ch)
         {
             var roman = GetMultiple(4, ch);
 
@@ -153,7 +153,7 @@ namespace RomanNumbers
         }
 
         [Test]
-        public void Calculate_throws_when_input_contains_5_consecutive_M_chars_in_the_middle()
+        public void ToArabicValue_throws_when_input_contains_5_consecutive_M_chars_in_the_middle()
         {
             var roman = "MCMMMMMLI";
 
