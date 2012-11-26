@@ -34,20 +34,15 @@ namespace RomanNumbers
             Assert.AreEqual(arabic, result);
         }
 
-        [Test]
-        public void ToArabicValue_returns_sum_for_MCMLIV()
+        [TestCase(1954, "MCMLIV")]
+        [TestCase(1944, "MCMXLIV")]
+        [TestCase(88, "LXXXVIII")]
+        [TestCase(39, "XXXIX")]
+        public void ToArabicValue_returns_sum_for_roman_number(int sum, string roman)
         {
-            var result = "MCMLIV".ToArabicValue();
+            var result = roman.ToArabicValue();
 
-            Assert.AreEqual(1954, result);
-        }
-        
-        [Test]
-        public void ToArabicValue_returns_sum_VIII()
-        {
-            var result = "VIII".ToArabicValue();
-
-            Assert.AreEqual(8, result);
+            Assert.AreEqual(sum, result);
         }
 
         [Test]
@@ -130,20 +125,20 @@ namespace RomanNumbers
             Assert.Throws<ArgumentException>(() => roman.ToArabicValue());
         }
 
-        [Test]
-        public void ToArabicValue_throws_when_input_contains_I_in_front_of_L()
+        [TestCase("IL")] [TestCase("IC")] [TestCase("ID")] [TestCase("IM")]
+        [TestCase("VX")] [TestCase("VL")] [TestCase("VC")] [TestCase("VD")] [TestCase("VM")]
+        [TestCase("XD")] [TestCase("XM")]
+        [TestCase("LC")] [TestCase("LD")] [TestCase("LM")]
+        [TestCase("IIV")] [TestCase("XXL")] [TestCase("CCM")]
+        public void ToArabicValue_throws_when_input_contains_lower_value_symbol_in_front_of_greather_value_symbol(
+            string invalidRoman)
         {
-            var roman = "IL";
-
-            Assert.Throws<ArgumentException>(() => roman.ToArabicValue());
+            Assert.Throws<ArgumentException>(() => invalidRoman.ToArabicValue());
         }
 
         [TestCase('I')]
-        [TestCase('V')]
         [TestCase('X')]
-        [TestCase('L')]
         [TestCase('C')]
-        [TestCase('D')]
         [TestCase('M')]
         public void ToArabicValue_throws_when_input_contains_4_consecutive_times_roman_symbol(char ch)
         {
@@ -152,10 +147,28 @@ namespace RomanNumbers
             Assert.Throws<ArgumentException>(() => roman.ToArabicValue());
         }
 
+        [TestCase('V')]
+        [TestCase('L')]
+        [TestCase('D')]
+        public void ToArabicValue_throws_when_input_contains_2_consecutive_times_roman_symbol(char ch)
+        {
+            var roman = GetMultiple(2, ch);
+
+            Assert.Throws<ArgumentException>(() => roman.ToArabicValue());
+        }
+
         [Test]
         public void ToArabicValue_throws_when_input_contains_5_consecutive_M_chars_in_the_middle()
         {
             var roman = "MCMMMMMLI";
+
+            Assert.Throws<ArgumentException>(() => roman.ToArabicValue());
+        }
+        
+        [Test]
+        public void ToArabicValue_throws_when_input_contains_2_non_consecutive_L_chars_in_the_middle()
+        {
+            var roman = "MCLXLI";
 
             Assert.Throws<ArgumentException>(() => roman.ToArabicValue());
         }
