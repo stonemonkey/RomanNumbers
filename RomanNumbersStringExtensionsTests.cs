@@ -92,6 +92,14 @@ namespace RomanNumbers
 
             Assert.AreEqual(900, result);
         }
+        
+        [Test]
+        public void ToArabicValue_returns_MAX()
+        {
+            var result = "MMMCMXCIX".ToArabicValue();
+
+            Assert.AreEqual(3999, result);
+        }
 
         [Test]
         public void ToArabicValue_throws_when_input_is_null()
